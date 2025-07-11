@@ -57,53 +57,60 @@
 		>0</span
 	>
 	<span style="height:2.5rem; border-left:1px solid #444; margin:0 1rem;"></span>
-	<select bind:value={selectedRole}>
-		{#each roles as role}
-			<option value={role}>{role.toUpperCase()}</option>
-		{/each}
-	</select>
-	<select bind:value={selectedPosition}>
-		{#if selectedRole === 'tank'}
-			<option value="1" style="width:2px; text-align:center;">MT</option>
-			<option value="2" style="max-width:1rem; text-align:center;">OT</option>
-		{:else}
-			<option value="1" style="max-width:2px; text-align:center;">1</option>
-			<option value="2" style="max-width:1rem; text-align:center;">2</option>
-		{/if}
-	</select>
-	<select bind:value={selectedFight} style="flex:1; min-width:0;" onchange={() => goToGuide()}>
-		<option disabled selected value="home"> -- select an option -- </option>
-		<option value="uwu">The Weapon's Refrain (Ultimate)</option>
-		<option value="b">Option B</option>
-		<option value="c">Option C</option>
-		<option value="d">Option D</option>
-	</select>
-	<a
-		href="/"
-		target="_blank"
-		rel="noopener"
-		style="color:#99aab5; font-size:1.5em; display:flex; align-items:center; gap:0.5em; margin-left:auto;"
-	>
-		<span
-			style="font-weight:bold; font-size:3rem; display:flex; align-items:center; justify-content:center; width:3rem; height:3rem; padding-bottom:.5rem; background:#2c2f33; border-radius:20%; font-family:'Monomaniac One', 'Courier New', Courier, monospace; color:#f1f3f4;"
-			>1</span
+	<div class="dropdowns">
+		<div style="display:flex; align-items:center; margin-bottom: 10px; gap: 10px;">
+			<select bind:value={selectedRole}>
+			{#each roles as role}
+				<option value={role}>{role.toUpperCase()}</option>
+			{/each}
+		</select>
+		<select bind:value={selectedPosition}>
+			{#if selectedRole === 'tank'}
+				<option value="1" style="width:2px; text-align:center;">MT</option>
+				<option value="2" style="max-width:1rem; text-align:center;">OT</option>
+			{:else}
+				<option value="1" style="max-width:2px; text-align:center;">1</option>
+				<option value="2" style="max-width:1rem; text-align:center;">2</option>
+			{/if}
+		</select>
+		</div>
+		<select bind:value={selectedFight} style="flex:1; min-width:0;" onchange={() => goToGuide()}>
+			<option disabled selected value="home"> -- select an option -- </option>
+			<option value="uwu">The Weapon's Refrain (Ultimate)</option>
+			<option value="b">Option B</option>
+			<option value="c">Option C</option>
+			<option value="d">Option D</option>
+		</select>
+	</div>
+
+	{#if !isMobile}
+		<a
+			href="/"
+			target="_blank"
+			rel="noopener"
+			style="color:#99aab5; font-size:1.5em; display:flex; align-items:center; gap:0.5em; margin-left:auto;"
 		>
-		Haze1
-	</a>
-	<span style="height:2.5rem; border-left:1px solid #444; margin:0 1rem;"></span>
-	<a
-		href="https://github.com/tikliz/Heat0"
-		target="_blank"
-		rel="noopener"
-		style="color:#99aab5; font-size:1.5em; display:flex; align-items:center; gap:0.5em;"
-	>
-		<svg height="1em" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:middle;">
-			<path
-				d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-			/>
-		</svg>
-		<span>Repo</span></a
-	>
+			<span
+				style="font-weight:bold; font-size:3rem; display:flex; align-items:center; justify-content:center; width:3rem; height:3rem; padding-bottom:.5rem; background:#2c2f33; border-radius:20%; font-family:'Monomaniac One', 'Courier New', Courier, monospace; color:#f1f3f4;"
+				>1</span
+			>
+			Haze1
+		</a>
+		<span style="height:2.5rem; border-left:1px solid #444; margin:0 1rem;"></span>
+		<a
+			href="https://github.com/tikliz/Heat0"
+			target="_blank"
+			rel="noopener"
+			style="color:#99aab5; font-size:1.5em; display:flex; align-items:center; gap:0.5em;"
+		>
+			<svg height="1em" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:middle;">
+				<path
+					d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+				/>
+			</svg>
+			<span>Repo</span></a
+		>
+	{/if}
 </nav>
 <div style="display:flex; min-height:calc(100vh - 5.5rem); margin-top:4.5rem;">
 	<aside
@@ -238,5 +245,20 @@
 		main {
 			padding: 1rem;
 		}
+	}
+
+	.dropdowns {
+		display: flex;
+		flex-direction: column;
+	}
+
+	@media (min-width: 768px) {
+		.dropdowns {
+			flex-direction: row;
+		}
+	}
+
+	.hidden {
+		display: none; /* Class to hide elements */
 	}
 </style>
