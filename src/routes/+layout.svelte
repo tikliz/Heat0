@@ -57,8 +57,8 @@
 		>0</span
 	>
 	<span style="height:2.5rem; border-left:1px solid #444; margin:0 1rem;"></span>
-	<div class="dropdowns">
-		<div style="display:flex; align-items:center; margin-bottom: 10px; gap: 10px;">
+	<div class="dropdowns" style="gap: 10px">
+		<div style="display:flex; align-items:center; gap: {isMobile ? '1rem' : '0'};">
 			<select bind:value={selectedRole}>
 			{#each roles as role}
 				<option value={role}>{role.toUpperCase()}</option>
@@ -255,6 +255,13 @@
 	@media (min-width: 768px) {
 		.dropdowns {
 			flex-direction: row;
+			width: 60%;
+		}
+	}
+	
+	@media (max-width: 600px) {
+		.dropdowns {
+			width: 70%;
 		}
 	}
 
