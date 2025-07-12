@@ -52,29 +52,30 @@
 <nav
 	style="position:fixed; top:0; left:0; width:100%; background:#23272a; padding:1rem; z-index:1000; display:flex; justify-content:left; gap:1rem; box-shadow:0 2px 4px rgba(0,0,0,0.3); align-items:center;"
 >
-	<span
-		style="font-weight:bold; font-size:3rem; display:flex; align-items:center; justify-content:center; width:3rem; height:3rem; padding-bottom:.5rem; background:#2c2f33; border-radius:20%; font-family:'Monomaniac One', 'Courier New', Courier, monospace; color:#f1f3f4;"
-		>0</span
-	>
-	<span style="height:2.5rem; border-left:1px solid #444; margin:0 1rem;"></span>
 	<div class="dropdowns" style="gap: 10px">
 		<div style="display:flex; align-items:center; gap: {isMobile ? '1rem' : '0'};">
+			<span
+				class="logo"
+				style="font-weight:bold; font-size:3rem; display:flex; align-items:center; justify-content:center; padding-bottom:.5rem; background:#2c2f33; border-radius:20%; font-family:'Monomaniac One', 'Courier New', Courier, monospace; color:#f1f3f4;"
+				>0</span
+			>
+			<span style="height:2.5rem; border-left:1px solid #444; margin:0 1rem;"></span>
 			<select bind:value={selectedRole}>
-			{#each roles as role}
-				<option value={role}>{role.toUpperCase()}</option>
-			{/each}
-		</select>
-		<select bind:value={selectedPosition}>
-			{#if selectedRole === 'tank'}
-				<option value="1" style="width:2px; text-align:center;">MT</option>
-				<option value="2" style="max-width:1rem; text-align:center;">OT</option>
-			{:else}
-				<option value="1" style="max-width:2px; text-align:center;">1</option>
-				<option value="2" style="max-width:1rem; text-align:center;">2</option>
-			{/if}
-		</select>
+				{#each roles as role}
+					<option value={role}>{role.toUpperCase()}</option>
+				{/each}
+			</select>
+			<select bind:value={selectedPosition}>
+				{#if selectedRole === 'tank'}
+					<option value="1" style="text-align:center;">MT</option>
+					<option value="2" style="text-align:center;">OT</option>
+				{:else}
+					<option value="1" style="text-align:center;">1</option>
+					<option value="2" style="text-align:center;">2</option>
+				{/if}
+			</select>
 		</div>
-		<select bind:value={selectedFight} style="flex:1; min-width:0;" onchange={() => goToGuide()}>
+		<select bind:value={selectedFight} style="width: {isMobile ? "100%" : "40%"};" onchange={() => goToGuide()}>
 			<option disabled selected value="home"> -- select an option -- </option>
 			<option value="uwu">The Weapon's Refrain (Ultimate)</option>
 			<option value="b">Option B</option>
@@ -167,6 +168,11 @@
 		color: #99aab5;
 	}
 
+	.logo {
+		width: 3rem;
+		height: 3rem;
+	}
+
 	.toggle-button {
 		position: fixed;
 		top: 6.7rem;
@@ -206,6 +212,12 @@
 			padding: 0.5rem;
 			gap: 0.5rem;
 			font-size: 0.9rem;
+		}
+
+		.logo {
+			width: 1.5rem;
+			height: 1.5rem;
+			font-size: 2rem;
 		}
 
 		select {
@@ -250,18 +262,19 @@
 	.dropdowns {
 		display: flex;
 		flex-direction: column;
+		flex: 1;
 	}
 
 	@media (min-width: 768px) {
 		.dropdowns {
 			flex-direction: row;
-			width: 60%;
+			/* width: 60%; */
 		}
 	}
-	
+
 	@media (max-width: 600px) {
 		.dropdowns {
-			width: 70%;
+			/* width: 70%; */
 		}
 	}
 
