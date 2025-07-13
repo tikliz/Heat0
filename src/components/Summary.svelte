@@ -1,13 +1,48 @@
 <!-- src/components/Summary.svelte -->
 <script lang="ts">
-	let { summaryItems } = $props();
-	let activeIndex = $state();
-
 	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { activeIndex, sectionRefs } from '$lib/scrollstate';
+	let { summaryItems } = $props();
+	let localIndex = $state($activeIndex);
+
+	onMount(() => {
+		let tries = 0;
+
+		const waitForRefs = setInterval(() => {
+			// Wait until all refs are non-null
+			if (sectionRefs.length > 0 && sectionRefs.every(Boolean)) {
+				clearInterval(waitForRefs);
+
+				const observer = new IntersectionObserver(
+					(entries) => {
+						for (const entry of entries) {
+							if (entry.isIntersecting) {
+								const index = sectionRefs.findIndex((el) => el === entry.target);
+								if (index !== -1) activeIndex.set(index);
+							}
+						}
+					},
+					{
+						root: null,
+						rootMargin: '0px 0px 0px 0px',
+						threshold: 0.1
+					}
+				);
+
+				sectionRefs.forEach((el) => el && observer.observe(el));
+
+				// Cleanup
+				return () => observer.disconnect();
+			}
+
+			if (tries++ > 50) clearInterval(waitForRefs); // fail-safe
+		}, 50); // check every 50ms
+	});
 
 	function handleClick(item: any, index: number) {
-		activeIndex = index;
-		goto(item.link);
+		sectionRefs[index]?.scrollIntoView({ behavior: 'smooth' });
+		// activeIndex.set(index);
 	}
 </script>
 
@@ -16,7 +51,7 @@
 	{#each summaryItems as item, index}
 		<button
 			onclick={() => handleClick(item, index)}
-			style="{activeIndex === index ? 'outline: 2px solid #7289da;' : 'outline: 0px'};"
+			style="{$activeIndex === index ? 'outline: 2px solid #7289da;' : 'outline: 0px'};"
 			>{item.title}</button
 		>
 	{/each}
