@@ -4,7 +4,6 @@
 	import { onMount } from 'svelte';
 	import { activeIndex, sectionRefs } from '$lib/scrollstate';
 	let { summaryItems } = $props();
-	let localIndex = $state($activeIndex);
 
 	onMount(() => {
 		let tries = 0;
@@ -25,7 +24,7 @@
 					},
 					{
 						root: null,
-						rootMargin: '0px 0px 0px 0px',
+						rootMargin: '0px 0px 7% 0px',
 						threshold: 0.1
 					}
 				);
@@ -56,14 +55,6 @@
 		>
 	{/each}
 </div>
-
-<!-- <ul>
-	{#each summaryItems as item}
-		<li>
-			<a href={item.link}>{item.title}</a>
-		</li>
-	{/each}
-</ul> -->
 
 <style>
 	h2 {

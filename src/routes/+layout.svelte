@@ -177,6 +177,7 @@
 	main {
 		flex: 1;
 		/* padding: 2rem; */
+		background-color: #1c1b22;
 		overflow-y: auto;
 		height: 100%;
 	}

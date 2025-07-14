@@ -1,11 +1,16 @@
 <script lang="ts">
     import { sectionRefs } from '$lib/scrollstate';
+	import { Canvas } from '@threlte/core';
+    import Arena from '../../components/Arena.svelte';
+	import { Sky } from '@threlte/extras';
 
     let introRef: HTMLElement;
 	let garudaRef: HTMLElement;
 	let ifritRef: HTMLElement;
 	let titanRef: HTMLElement;
 	let ultimaRef: HTMLElement;
+
+    let arenaRef: any;
 
     $effect(() => {
         sectionRefs.length = 0;
@@ -27,6 +32,11 @@
         <h2>Introduction</h2>
         <p>blablablablabla MARKERS blabalablabal NAUR blablablabala CENTERUDA</p>
     </section>
+
+    <Canvas>
+        <Sky elevation={90} />
+        <Arena bind:this={arenaRef} />
+    </Canvas>
     <span style="margin: 3rem;"></span>
 
     <section id="garuda" bind:this={garudaRef}>
